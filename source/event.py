@@ -68,13 +68,13 @@ class Event:
 		if parent is None:
 			if choice_index is not None:
 				raise ValueError(
-					'A parent event and choice' +
+					'A parent event and choice ' +
 					'index must be provided together.'
 				)
 		else:
 			if choice_index is None:
 				raise ValueError(
-					'A parent event and choice' +
+					'A parent event and choice ' +
 					'index must be provided together.'
 				)
 			# Both the choice and choice
