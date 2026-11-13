@@ -7,12 +7,16 @@ from story import Story
 class FileWritter:
 	def __init__(self, story: Story):
 		self.story: Story = story
-		self.dir: str = input('What folder-name do you want your output files to be in? ')
+		self.dir: str = input(
+			'What folder-name do you want your output files to be in? '
+		)
 		if self.dir == '':
 			self.dir = 'story'
 		output_dir = f'./{self.dir}'
 		if os.path.exists(output_dir):
-			raise FileExistsError('This folder already exists! Please try again.')
+			raise FileExistsError(
+				'This folder already exists! Please try again.'
+			)
 
 		else:
 			os.mkdir(output_dir)
@@ -20,7 +24,9 @@ class FileWritter:
 
 	def main(self):
 		if self.story.root is None:
-			raise RuntimeError('The story must be written before it can be exported.')
+			raise RuntimeError(
+				'The story must be written before it can be exported.'
+			)
 
 		self.write_cover()
 		self.write_event(self.story.root)
