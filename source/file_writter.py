@@ -16,9 +16,11 @@ class FileWritter:
 			os.mkdir(f'{output_dir}/pages')
 
 	def main(self):
-		story = self.story
+		if self.story.root is None:
+			raise RuntimeError('The story must be written before it can be exported.')
+
 		self.write_cover()
-		self.write_event(story.root)
+		self.write_event(self.story.root)
 
 	def write_cover(self):
 		story = self.story

@@ -65,7 +65,18 @@ class Event:
 			f'\n{"-" * 47}\n'
 		)
 
-		if not (parent is None and choice_index is None):
+		if parent is None:
+			if choice_index is not None:
+				raise ValueError(
+					'A parent event and choice' +
+					'index must be provided together.'
+				)
+		else:
+			if choice_index is None:
+				raise ValueError(
+					'A parent event and choice' +
+					'index must be provided together.'
+				)
 			# Both the choice and choice
 			# index are needed to provide context.
 			choice = parent.choices[choice_index]
