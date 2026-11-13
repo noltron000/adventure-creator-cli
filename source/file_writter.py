@@ -33,38 +33,38 @@ class FileWritter:
 			f'(./pages/{id(story.root)}.md)\n'
 		)
 
-		# then create the file
+		# Then, create the file.
 		with open(f'./{self.dir}/START.md', 'w+') as file:
 			file.write(markdown)
 
 	def write_event(self, event):
-		# compile event path
+		# Compile the event path.
 		event_path = f'./{self.dir}/pages/{id(event)}.md'
-		# check if the compiled markdown file exists.
+		# Check if the compiled Markdown file exists.
 		if os.path.isfile(event_path):
 			return
 
-		# first create the list of options.
+		# First, create the list of options.
 		option_list = ''
 		for index, choice in enumerate(event.choices):
 			outcome = event.outcomes[index]
-			# compile event path
+			# Compile the event path.
 			outcome_path = f'./{id(outcome)}.md'
 			option_list += f'1. [{choice}]({outcome_path})\n'
 
 		if option_list != '':
 			option_list = '\n---\n\n' + option_list
 
-		# next compile the markdown
+		# Next, compile the Markdown.
 		markdown = (
 			f'{event.content}\n'
 			f'{option_list}'
 		)
 
-		# then create the file
+		# Then, create the file.
 		with open(event_path, 'w+') as file:
 			file.write(markdown)
 
-		# finally repeat for child events
+		# Finally, repeat for child events.
 		for outcome in event.outcomes:
 			self.write_event(outcome)

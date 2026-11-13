@@ -1,14 +1,15 @@
 class Event:
 	'''
-	An event can be thought of as a discrete chunk of script
-	from the story. Like a short act in a play.
+	An event can be thought of as a discrete chunk
+	of script from the story, like a short act in a play.
 
-	An event usually has some sort of choice at the end,
-	as the nature of choose-your-own adventure stories are.
+	An event usually has a choice at the end,
+	as is common in choose-your-own-adventure stories.
 
-	The choices are visible to the reader...
-	...but not their outcome.
-	Their outcome, however, takes the form of another event!
+	The choices are visible to the reader,
+	but their outcomes are not.
+	Their outcomes, however,
+	take the form of another event.
 	'''
 
 	def __init__(self):
@@ -17,20 +18,20 @@ class Event:
 		self.content = ''
 
 		# Different choices lead to different outcomes.
-		# Their array index coorelates with one another.
-		self.choices = [] # remains empty if theres no choices.
-		self.outcomes = [] # empty if the event is terminal.
+		# Their array indices correspond to one another.
+		self.choices = []  # This remains empty if there are no choices.
+		self.outcomes = []  # This is empty if the event is terminal.
 		# ==NOTE==
-		# I was not sure which data-structure to use here,
-		# since the choice and outcome are always presented
-		# in a specific order designed by the writter.
+		# I was unsure which data structure to use here
+		# because each choice and outcome must remain
+		# in a specific order set by the writer.
 
 	def __repr__(self):
 		'''
 		Represents what is seen by the user.
-		Specifically, this outputs a string including:
-		- the main content of the event
-		- a numbered-list of available choices
+		Specifically, this method outputs a string
+		containing the event content and a numbered
+		list of available choices.
 		'''
 		option_list = ''
 		for index, choice in enumerate(self.choices):
@@ -41,111 +42,123 @@ class Event:
 			f'{option_list}'
 		)
 
-	def add_content(self, parent = None, choice_index = None):
+	def add_content(
+		self,
+		parent = None,
+		choice_index = None,
+	):
 		'''
-		This asks the user add string content to the event.
+		This method asks the user to
+		add string content to the event.
 
-		==NOTE==
-		This method should be called without parameters
-		just once, only when it is used in Story.write().
-		Otherwise, the parameters are needed to give
-		the user more context to what they are writting.
+		Call this method without parameters
+		exactly once from Story.write().
+		Otherwise, provide the parameters to give
+		the user context for what they are writing.
 		'''
 		# ==READ==
-		# The user should know the context of this function
-		# pretty much as soon as its called, or they will be
-		# asked to input information without knowing what for.
+		# The user should know this function's
+		# context as soon as it is called.
+		# Otherwise, they may be asked for
+		# input without knowing what it is for.
 		print(
 			f'\n{"-" * 47}\n'
 		)
 
 		if not (parent is None and choice_index is None):
-			# Both choice & choice_index are needed for the user.
+			# Both the choice and choice
+			# index are needed to provide context.
 			choice = parent.choices[choice_index]
 
 			# ==READ==
 			# The user needs to see what they are adding to.
-			# Here, they are adding an event's contents
-			# in response to a choice that they added earlier.
-			# Let them know exactly which choice that is.
-			# The event's contents are visited again later;
-			# it too might have choices of its own.
+			# They are adding event content
+			# in response to an earlier choice.
+			# Show them exactly which choice that is.
+			# This event may be revisited later
+			# and may have choices of its own.
 			print(
 				f'{parent}\n'
 				f'({choice_index + 1}. {choice})'
 			)
 
 		# ==WRITE==
-		# Once the user knows the context of this function,
-		# they are asked to add a section to the story.
+		# Once the user knows the context,
+		# ask them to add a section to the story.
 		self.content = input(
 			'Please input the event\'s content:\t'
 		)
 
 	def add_choices(self):
 		'''
-		This asks the user add string choices to the event.
+		This method asks the user
+		to add string choices to the event.
 		The choices should be based on the event's content.
 		'''
 		# ==READ==
-		# The user should know the context of this function
-		# pretty much as soon as its called, or they will be
-		# asked to input information without knowing what for.
+		# The user should know this function's
+		# context as soon as it is called.
+		# Otherwise, they may be asked for
+		# input without knowing what it is for.
 		print(
 			f'\n{"-" * 47}\n'
 		)
 
-		# The `choice` here is needed to start the while loop.
-		# It will be overwritten with a string later.
-		# The string will be False if it is empty,
-		# otherwise it is True because the user added data.
+		# The choice variable starts the loop
+		# and is later overwritten by a string.
+		# An empty string is false; a nonempty
+		# string is true because the user entered data.
 		choice = True
-		# A loop is needed since an event can have many choices.
+		# A loop is needed because an
+		# event can have many choices.
 		while choice:
 			# ==READ==
-			# The user will be asked if they want to add
-			# another `choice` option to the event.
-			# Because they will be asked about it multiple times,
-			# the loop's context should be repeatedly described
-			# so that the user doesn't forget what they are doing.
+			# The user will be asked whether they want
+			# to add another choice to the event.
+			# Because this question is repeated,
+			# describe the context each time so
+			# the user does not forget what they are doing.
 			print(self)
 
 			# ==WRITE==
-			# Once the user knows the context of this function,
-			# they are asked to add a `choice` to the event.
+			# Once the user knows the context,
+			# ask them to add a choice.
 			choice = input(
 				'Create a new choice for this event\n'
 				'(you can leave this blank to skip):\t'
 			)
 
-			# Is `choice` left blank?
+			# Check whether the user left the choice blank.
 			if choice:
 				self.choices.append(choice)
 
-		# Once the loop finished, `self.choices` is populated.
-		# If left empty, the event is considered terminal.
-		# The for loop will end immediately in this case.
+		# Once the loop finishes, self.choices is populated.
+		# If it is empty, the event is terminal.
+		# The for loop ends immediately in this case.
 		for choice_index, choice in enumerate(self.choices):
 			# Create a new outcome event for each choice.
 			event = Event()
-			# Add content to the outcome `event`.
-			# The content branches off of the `choices` added here.
+			# Add content to the outcome event.
+			# Its content branches off
+			# from the choices added here.
 			event.add_content(self, choice_index)
-			# The outcome `event` proceeds our `self`.
+			# The outcome event proceeds from this event.
 			self.outcomes.append(event)
 
-		# Once each of the `events` are created,
-		# they too can have `choices` of their own.
-		# This recursively creates yet more `choices`,
-		# and with those `choices` more `events`.
+		# Once each event is created,
+		# it can have choices of its own.
+		# This recursively creates more choices and,
+		# with them, more events.
 		for event in self.outcomes:
 			event.add_choices()
 
 	def is_terminal(self):
 		'''
-		Checks if the node is a leaf, or an ending.
-		There are no more choices to be made, this is the end.
+		Checks whether the node is a leaf, or an ending.
+		There are no more choices
+		to be made, so this is the end.
 
-		Was it happy? Was it sad? That's for you to decide!
+		Was it happy? Was it sad?
+		That's for you to decide!
 		'''
 		return self.outcomes == []
