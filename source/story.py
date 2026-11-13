@@ -1,5 +1,6 @@
 from event import *
 
+
 class Story:
 	'''
 	A story points a reader to the first event.

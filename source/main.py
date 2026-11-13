@@ -1,5 +1,5 @@
-from story import *
 from file_writter import *
+from story import *
 
 if __name__ == '__main__':
 	story = Story()

@@ -1,5 +1,6 @@
 import os
 
+
 class FileWritter:
 	def __init__(self, story):
 		self.story = story
