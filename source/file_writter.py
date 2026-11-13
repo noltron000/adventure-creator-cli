@@ -6,12 +6,13 @@ class FileWritter:
 		self.dir = input('What folder-name do you want your output files to be in? ')
 		if self.dir == '':
 			self.dir = 'story'
-		if os.path.isdir(f'./{self.dir}'):
-			raise # ValueError('This folder already exists! Please try again.')
+		output_dir = f'./{self.dir}'
+		if os.path.exists(output_dir):
+			raise FileExistsError('This folder already exists! Please try again.')
 
 		else:
-			os.mkdir(f'./{self.dir}')
-			os.mkdir(f'./{self.dir}/pages')
+			os.mkdir(output_dir)
+			os.mkdir(f'{output_dir}/pages')
 
 	def main(self):
 		story = self.story
