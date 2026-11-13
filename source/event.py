@@ -15,18 +15,18 @@ class Event:
 	def __init__(self):
 		# The content is long-form, unformatted text.
 		# It is the main information presented to the user.
-		self.content = ''
+		self.content: str = ''
 
 		# Different choices lead to different outcomes.
 		# Their array indices correspond to one another.
-		self.choices = []  # This remains empty if there are no choices.
-		self.outcomes = []  # This is empty if the event is terminal.
+		self.choices: list[str] = []  # This remains empty if there are no choices.
+		self.outcomes: list[Event] = []  # This is empty if the event is terminal.
 		# ==NOTE==
 		# I was unsure which data structure to use here
 		# because each choice and outcome must remain
 		# in a specific order set by the writer.
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		'''
 		Represents what is seen by the user.
 		Specifically, this method outputs a string
@@ -44,8 +44,8 @@ class Event:
 
 	def add_content(
 		self,
-		parent = None,
-		choice_index = None,
+		parent: 'Event | None' = None,
+		choice_index: int | None = None,
 	):
 		'''
 		This method asks the user to
@@ -163,7 +163,7 @@ class Event:
 		for event in self.outcomes:
 			event.add_choices()
 
-	def is_terminal(self):
+	def is_terminal(self) -> bool:
 		'''
 		Checks whether the node is a leaf, or an ending.
 		There are no more choices

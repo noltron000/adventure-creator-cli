@@ -13,14 +13,14 @@ class Story:
 	def __init__(self):
 		# The content is long-form, unformatted text.
 		# It is essentially the metadata of the story.
-		self.title = ''
-		self.subtitle = ''
-		self.synopsis = ''
+		self.title: str = ''
+		self.subtitle: str = ''
+		self.synopsis: str = ''
 
 		# This is the first event of the story.
-		self.root = None
+		self.root: Event | None = None
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		'''
 		Represents what is seen by the user.
 		Specifically, this method outputs a string

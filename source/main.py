@@ -8,7 +8,7 @@ if sys.version_info < (3, 14):
 
 
 if __name__ == '__main__':
-	story = Story()
+	story: Story = Story()
 	story.write()
-	file_writter = FileWritter(story)
+	file_writter: FileWritter = FileWritter(story)
 	file_writter.main()

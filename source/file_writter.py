@@ -1,10 +1,13 @@
 import os
 
+from event import Event
+from story import Story
+
 
 class FileWritter:
-	def __init__(self, story):
-		self.story = story
-		self.dir = input('What folder-name do you want your output files to be in? ')
+	def __init__(self, story: Story):
+		self.story: Story = story
+		self.dir: str = input('What folder-name do you want your output files to be in? ')
 		if self.dir == '':
 			self.dir = 'story'
 		output_dir = f'./{self.dir}'
@@ -39,7 +42,7 @@ class FileWritter:
 		with open(f'./{self.dir}/START.md', 'w+') as file:
 			file.write(markdown)
 
-	def write_event(self, event):
+	def write_event(self, event: Event):
 		# Compile the event path.
 		event_path = f'./{self.dir}/pages/{id(event)}.md'
 		# Check if the compiled Markdown file exists.
