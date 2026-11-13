@@ -1,7 +1,7 @@
 # Adventure Creator
 ## [Medium Article](https://medium.com/@noltron000/decisions-adventures-and-trees-ca91a1885600)
 ## Requirements
-Python 3.15 or newer is required.
+Python 3.14 or newer is required.
 
 ## Usage
 1. clone the project to a directory of your choice
