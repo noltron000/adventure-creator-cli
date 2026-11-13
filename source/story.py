@@ -1,32 +1,31 @@
-from event import *
+from event import Event
+
 
 class Story:
 	'''
 	A story points a reader to the first event.
 	It also holds metadata, such as its title.
 
-	Finally, it holds the function of impetus -- self.write().
-	This thing sets off all the recursion within the Event.
+	Finally, it holds the function of impetus: self.write().
+	This method sets off all the recursion within the Event.
 	'''
 
 	def __init__(self):
 		# The content is long-form, unformatted text.
-		# It is essentially the meta-data of the story.
-		self.title = ''
-		self.subtitle = ''
-		self.synopsis = ''
+		# It is essentially the metadata of the story.
+		self.title: str = ''
+		self.subtitle: str = ''
+		self.synopsis: str = ''
 
-		# The first event of the story.
-		self.root = None
+		# This is the first event of the story.
+		self.root: Event | None = None
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		'''
 		Represents what is seen by the user.
-		Specifically, this outputs a string containing:
-		- the title of the story
-		- the subtitle of the story
-		- a synopsis of the story
-		- the number of possible endings
+		Specifically, this method outputs a string
+		containing the title, subtitle, synopsis,
+		and number of possible endings.
 		'''
 		return (
 			f'{self.title.upper()}\n'
@@ -37,9 +36,10 @@ class Story:
 
 	def write(self):
 		'''
-		Write will ask the user for some basic metadata.
-		Then, it will start the process of asking for all the
-		other data and storylines that a good adventure needs.
+		The write() method asks the user
+		for some basic metadata.
+		Then, it starts asking for all the other
+		data and storylines that a good adventure needs.
 		'''
 		input(
 			f'{"=" * 47}\n'
